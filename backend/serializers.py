@@ -9,4 +9,4 @@ from models import Pfm, Matrix
 class MatrixSerializer(serializers.ModelSerializer):
     class Meta:
         model = Matrix
-        fields = ["matrix_id", "pfm"]
+        fields = ["matrix_id", "name", "pfm"]
