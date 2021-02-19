@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from backend.models import Matrix
+from backend.models import Matrix, Pfm
 import requests
 from rest_framework import viewsets
 from django.core import serializers
@@ -10,9 +10,9 @@ from django.http import HttpResponse, JsonResponse
 def get_matrix(request):
     all_matrices = {}
 
-    url = "http://jaspar.genereg.net/api/v1/species/9606/?page=1&page_size=1000"
-    response = requests.get(url)
-    data = response.json()
+    url_matrix = "http://jaspar.genereg.net/api/v1/species/9606/?page=1&page_size=1000"
+    response_matrix = requests.get(url_matrix)
+    data = response_matrix.json()
     matrix = data["results"]
     
     post_matrix(matrix)
@@ -30,13 +30,32 @@ def get_matrix(request):
 
     
 def post_matrix(matrix):
+    url_pfm = "http://jaspar.genereg.net/api/v1/matrix/"
 
     for i in matrix:
+
+        m_id = i["matrix_id"]
+
+        response_pfm = requests.get(url_pfm + m_id + "/?format=json")
+        data = response_pfm.json()
+        atcg = data["pfm"]
+        print("DETTE ER A", atcg["A"])
+
+        pfm_data = Pfm(
+            adenin = atcg["A"],
+            thymine = atcg["T"],
+            cytosine = atcg["C"],
+            guanine = atcg["G"],
+        )
+        pfm_data.save()
+
         matrix_data = Matrix(
-            matrix_id = i["matrix_id"],
-            name = i["name"]
+            matrix_id = m_id,
+            name = i["name"],
+            pfm = pfm_data
         )
         matrix_data.save()
+
 
 
 def matrix_detail(request, matrix_id):
