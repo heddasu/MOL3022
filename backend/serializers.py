@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from models import Pfm, Matrix
+from backend.models import Pfm, Matrix
 
 class PfmSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pfm
-        fields = ["adenin", "thymine", "cytosine", "guanin"]
+        fields = ["adenin", "thymine", "cytosine", "guanine"]
 
 class MatrixSerializer(serializers.ModelSerializer):
     class Meta:

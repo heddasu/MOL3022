@@ -1,12 +1,38 @@
 from django.shortcuts import render
 from backend.models import Matrix, Pfm
-import requests
+#import requests
 from rest_framework import viewsets
+from rest_framework.response import Response
 from django.core import serializers
 from rest_framework.utils import json
 from django.http import HttpResponse, JsonResponse
+from backend.serializers import MatrixSerializer, PfmSerializer
+from django.shortcuts import get_object_or_404
 
 
+
+class MatrixViewSet(viewsets.ModelViewSet):
+    queryset = Matrix.objects.all()
+    serializer_class = MatrixSerializer
+
+    def get_queryset(self):
+        queryset = self.queryset
+        
+        matrix_id = self.request.query_params.get("id", None)
+
+        if matrix_id is not None:
+            try:
+                queryset = Matrix.objects.filter(matrix_id=matrix_id)
+            except ValueError:
+                print("Not valid matrix ID")
+
+        return queryset
+
+class PfmViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Pfm.objects.all()
+    serializer_class = PfmSerializer
+
+"""
 def get_matrix(request):
     all_matrices = {}
 
@@ -27,6 +53,7 @@ def get_matrix(request):
     qs_json = serializers.serialize('json', all_matrices)
 
     return HttpResponse(qs_json, content_type='application/json')
+
 
     
 def post_matrix(matrix):
@@ -63,3 +90,4 @@ def matrix_detail(request, matrix_id):
 
     return HttpResponse(matrix, content_type='application/json')
 
+"""
