@@ -207,7 +207,8 @@ export default {
         this.loader = null
 
         //TODO: if motatt data -> 
-          this.presentResults()
+        if (this.loading == null) {
+          this.presentResults()}
       }
   },
   computed: {
@@ -240,7 +241,7 @@ export default {
       this.motifsChosen = []
       this.select = null
       this.revealResult = false
-      this.revealButton = false
+      this.revealButton = true
       this.editInput = true
       this.$refs.observer.reset()
     }
