@@ -1,13 +1,7 @@
-from django.shortcuts import render
 from backend.models import Matrix, Pfm
-#import requests
 from rest_framework import viewsets
-from rest_framework.response import Response
-from django.core import serializers
-from rest_framework.utils import json
-from django.http import HttpResponse, JsonResponse
 from backend.serializers import MatrixSerializer, PfmSerializer
-from django.shortcuts import get_object_or_404
+
 
 
 
@@ -25,8 +19,9 @@ class MatrixViewSet(viewsets.ModelViewSet):
                 queryset = Matrix.objects.filter(matrix_id=matrix_id)
             except ValueError:
                 print("Not valid matrix ID")
+        print(queryset)
 
-        return queryset
+        return queryset.values('matrix_id')
 
 class PfmViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Pfm.objects.all()
