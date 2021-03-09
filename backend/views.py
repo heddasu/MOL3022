@@ -39,7 +39,6 @@ def post_matrix(matrix):
         response_pfm = requests.get(url_pfm + m_id + "/?format=json")
         data = response_pfm.json()
         atcg = data["pfm"]
-        print("DETTE ER A", atcg["A"])
 
         pfm_data = Pfm(
             adenin = atcg["A"],
