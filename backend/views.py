@@ -5,7 +5,7 @@ from rest_framework import viewsets
 from django.core import serializers
 from rest_framework.utils import json
 from django.http import HttpResponse, JsonResponse
-
+import math 
 
 def get_matrix(request):
     all_matrices = {}
@@ -63,3 +63,15 @@ def matrix_detail(request, matrix_id):
 
     return HttpResponse(matrix, content_type='application/json')
 
+
+
+def pwm(freq, total, bg=0.25):
+    p = (freq + (math.sqrt(total) * 1/4)) / (total + (4 * (math.sqrt(total) * 1/4)))
+    print(p)
+    pwm = math.log(p/bg,2)
+    return pwm
+
+
+
+
+print(pwm(1,6))
