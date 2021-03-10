@@ -1,23 +1,35 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
-  </div>
+  <v-app>
+    <Header @switch="changeView" />
+    <v-main>
+      <Input/>
+    </v-main>
+    <Footer @switch="changeView" />
+  </v-app>
 </template>
 
 <script>
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Input from "./views/Input";
+
 export default {
-  name: 'App'
-}
+  components: {
+    Header,
+    Input,
+    Footer,
+  },
+  data: () => ({
+  }),
+  methods: {
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+@media (min-width: 1904px) {
+  .container {
+    max-width: 1185px !important;
+  }
 }
 </style>
