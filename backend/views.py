@@ -72,6 +72,12 @@ def pwm(freq, total, bg=0.25):
     return pwm
 
 
+def pwm2(freq, total, bg=0.25):
+    p = (freq + (math.sqrt(total) * 1/4)) / (total + (4 * (math.sqrt(total) * 1/4)))
+    print(p)
+    pwm = math.log(p/bg,2)
+    return pwm
+
 
 
 print(pwm(1,6))
