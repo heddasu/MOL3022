@@ -105,6 +105,3 @@ ENV/
 .idea/
 *.iml
 
-# sqlite
-*.sqlite
-*.sqlite3

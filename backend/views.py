@@ -19,7 +19,6 @@ class MatrixViewSet(viewsets.ModelViewSet):
                 queryset = Matrix.objects.filter(matrix_id=matrix_id)
             except ValueError:
                 print("Not valid matrix ID")
-        print(queryset)
 
         return queryset.values('matrix_id')
 
