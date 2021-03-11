@@ -118,7 +118,7 @@
           <v-card-text class="my-2 py-0">
             <h4> Most likely transcription factor binding sites (sorted from most to least likely): </h4>
             <ul>
-            <li v-for="motif in motifsResults" :key="motif">{{motif}}</li>
+            <li v-for="motif in results" :key="motif">{{motif}}</li>
             </ul>
           </v-card-text>
         </v-row>
@@ -188,7 +188,7 @@ export default {
     revealResult: false,
     revealButton: true,
     editInput: true,
-    motifsResults: ["cat"], //TODO: Hent data fra database
+    results: null,
     items: [],
   }),
   watch: {
@@ -201,9 +201,8 @@ export default {
         setTimeout(() => (this[l] = false), 3000) //TODO: Load til data er mottatt
         this.loader = null
 
-        //this.postResults()
-        //TODO: if motatt data -> 
-        //this.presentResults()
+        this.postResults()
+        this.presentResults()
       }
   },
   computed: {
@@ -217,10 +216,11 @@ export default {
       );
     },
     postResults: function() {
-      axios.post('http://127.0.0.1:8000/matrix/', {dna: this.dnaSequence, motifs: this.motifsChosen}).then(
+      axios.post('http://127.0.0.1:8000/matrix/', {
+        dnaSequence: this.dnaSequence, motifsChosen: this.motifsChosen}
+        ).then(
         response => {
-          this.presentResults()
-          this.result.push(response.data);
+          this.results = response.data; //TODO: Oppdater så vi får akkuratt den dataen vi vil ha 
         }
       );
     },
@@ -236,7 +236,7 @@ export default {
 
     makeGraph() {
       //"Result, sorted from most to least likely is presented below. Only the top X most likely binding sites are shown."
-      //for x in this.motifsResults {
+      //for x in this.results {
       //  "Motif id: " + i.matrix_id
       //  "Chance of attachment:" + i.matrix_score
       //}
