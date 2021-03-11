@@ -2,8 +2,6 @@ from backend.models import Matrix, Pfm
 from rest_framework import viewsets, status
 from backend.serializers import MatrixSerializer, PfmSerializer
 from backend.calculations import tranform_pfm_object_to_matrix, calculate_number_of_sites, calculate_pwm, transform_pfm_to_pwm, compute_sequence_prob
-
-
 import json
 from rest_framework.response import Response
 
@@ -48,6 +46,7 @@ class MatrixViewSet(viewsets.ModelViewSet):
         for matrix in relevant_matrices:
             pfm_result = Pfm.objects.filter(id=matrix.pfm.id)
             for pfm in pfm_result:
+
                 pfm_matrix = tranform_pfm_object_to_matrix(pfm)
                 calc_pwm = transform_pfm_to_pwm(pfm_matrix)
                 probability = compute_sequence_prob(calc_pwm, dna_sequence)
