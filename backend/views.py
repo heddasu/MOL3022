@@ -1,6 +1,8 @@
 from backend.models import Matrix, Pfm
 from rest_framework import viewsets
 from backend.serializers import MatrixSerializer, PfmSerializer
+# from backend.calculations import 
+from backend.calculations import tranform_pfm_object_to_matrix, calculate_number_of_sites, calculate_pwm, transform_pfm_to_pwm, compute_sequence_prob
 
 
 
@@ -10,6 +12,18 @@ class MatrixViewSet(viewsets.ModelViewSet):
     serializer_class = MatrixSerializer
 
     def get_queryset(self):
+
+        """pfm = Pfm.objects.filter(id=3)
+        for p in pfm:
+            pfm_matrix = tranform_pfm_object_to_matrix(p)
+        print('PFM-matrix', pfm_matrix)
+        count_sites = calculate_number_of_sites(pfm_matrix)  
+        calc_pwm = transform_pfm_to_pwm(pfm_matrix)
+        print('PWM_matrix', calc_pwm)
+
+        print('Calculate sequences', compute_sequence_prob(calc_pwm, 'AAAAAAAAAAAA'))"""
+
+
         queryset = self.queryset
         
         matrix_id = self.request.query_params.get("id", None)
