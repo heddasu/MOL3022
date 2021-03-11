@@ -20,7 +20,7 @@ class MatrixViewSet(viewsets.ModelViewSet):
             except ValueError:
                 print("Not valid matrix ID.")
 
-        return queryset.order_by('matrix_id').values('matrix_id').order_by('matrix_id')
+        return queryset.order_by('matrix_id')#.values('matrix_id').order_by('matrix_id')
 
 
 
@@ -58,6 +58,19 @@ class MatrixViewSet(viewsets.ModelViewSet):
 class PfmViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Pfm.objects.all()
     serializer_class = PfmSerializer
+
+    def get_queryset(self):
+        queryset = self.queryset
+            
+        pfm_id = self.request.query_params.get("id", None)
+
+        if pfm_id is not None:
+            try:
+                queryset = Pfm.objects.filter(id=pfm_id)
+            except ValueError:
+                print("Not valid PFM ID.")
+
+        return queryset
 
 
 
