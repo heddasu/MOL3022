@@ -18,13 +18,7 @@ from django.urls import path, include
 from django.http import HttpResponse
 from django.shortcuts import render
 
-vue_urls = [
-    path('', lambda request: HttpResponse(render(request, 'index.html'))),
-]
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('backend.urls')),
-    path('', include(vue_urls)),
     path('', include('backend.urls')),
 ]
