@@ -1,6 +1,7 @@
 from backend.models import Matrix, Pfm
 from rest_framework import viewsets, status
 from backend.serializers import MatrixSerializer, PfmSerializer
+from backend.calculations import tranform_pfm_object_to_matrix, calculate_number_of_sites, calculate_pwm, transform_pfm_to_pwm, compute_sequence_prob
 import json
 from rest_framework.response import Response
 
@@ -39,17 +40,35 @@ class MatrixViewSet(viewsets.ModelViewSet):
 
         dna_sequence = data.get("dnaSequence")
         relevant_matrices = queryset.filter(matrix_id__in=(data.get("motifsChosen")))
-
+        
+        probabilities = {}
 
         for matrix in relevant_matrices:
             pfm_result = Pfm.objects.filter(id=matrix.pfm.id)
             for pfm in pfm_result:
-                #TODO: send pfm to calculations
-                print(pfm.id)
-                print(dna_sequence)
+
+                pfm_matrix = tranform_pfm_object_to_matrix(pfm)
+                calc_pwm = transform_pfm_to_pwm(pfm_matrix)
+                probability = compute_sequence_prob(calc_pwm, dna_sequence)
+                print("PROB",probability)
+                probabilities[pfm.id] = probability
+            
+        """
+        pfm = Pfm.objects.filter(id=3)
+        for p in pfm:
+            pfm_matrix = tranform_pfm_object_to_matrix(p)
+        print('PFM-matrix', pfm_matrix)
+        count_sites = calculate_number_of_sites(pfm_matrix)  
+        calc_pwm = transform_pfm_to_pwm(pfm_matrix)
+        print('PWM_matrix', calc_pwm)
+
+        print('Calculate sequences', compute_sequence_prob(calc_pwm, 'AAAAAAAAAAAA'))"""
+        
+        #data = json.dumps(probabilities)
+        #print("DATA", data)
 
         return Response(
-            {"HEIHEI"},
+            probabilities,
             status=status.HTTP_200_OK,
         )
 
