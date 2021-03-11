@@ -241,7 +241,10 @@ export default {
       //  "Chance of attachment:" + i.matrix_score
       //}
 
-      //TODO
+      //TODO: 
+      //Mulig å zoome i grafene 
+      //Y-aksen viser score for om det eksisterer et bindingssete for en gitt posisjon, 
+      //X-aksen viser hvilken posisjon det er snakk om. 
     },
     presentResults () {
       //Presentere resultatet
