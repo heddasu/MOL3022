@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <Header @switch="changeView" />
+    <Header />
     <v-main>
       <Input/>
     </v-main>
-    <Footer @switch="changeView" />
+    <Footer />
   </v-app>
 </template>
 

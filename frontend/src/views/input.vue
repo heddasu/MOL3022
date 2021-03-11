@@ -16,7 +16,7 @@
           <validation-provider
             v-slot="{ errors }"
             name="DNA-sequence"
-            :rules= {required,max:1000,min:20}
+            :rules= "{required: true,max:1000,min:20,regex:/^[!actgACTG]+$/}"
           >
             <v-text-field
               class="my-0 py-0"
@@ -74,7 +74,7 @@
           <v-btn
             type="submit"
             v-if="revealButton"
-            :disabled="invalid"
+            :disabled="invalid || loading"
             :loading="loading"
             elevation="2"
             rounded
@@ -147,6 +147,7 @@ import {
   ValidationProvider,
   setInteractionMode,
 } from "vee-validate";
+import axios from 'axios';
 
 setInteractionMode("eager");
 
@@ -168,7 +169,7 @@ extend("min", {
 extend("regex", {
   ...regex, //TODO: Legg inn (v) => (v && !v.match("[^actgACTG]")) ||
   message: 
-    "{_field_} {_value_} {regex} Sequence can only contain characters A, T, C and G",
+    "The {_field_} can only contain the characters A, T, C and G",
 });
 
 export default {
@@ -188,47 +189,57 @@ export default {
     revealButton: true,
     editInput: true,
     motifsResults: ["cat"], //TODO: Hent data fra database
-    items: [ //TODO: Hent data fra database
-        'MOTIF1',
-        'MOTIF2',
-        'MOTIF3',
-        'MOTIF4',
-    ],
+    items: [],
   }),
   watch: {
       loader () {
         //Loader mens data sendes og motass 
-        console.log("loaderdna = " + this.dnaSequenc)
-        console.log("loadermotif = " + this.motifsChosen)
+        
         //TODO: Send data
         const l = this.loader
         this[l] = !this[l]
         setTimeout(() => (this[l] = false), 3000) //TODO: Load til data er mottatt
         this.loader = null
 
+        //this.postResults()
         //TODO: if motatt data -> 
-        if (this.loading == null) {
-          this.presentResults()}
+        //this.presentResults()
       }
   },
   computed: {
   },
   methods: {
+    getMotifs: function() {
+      axios.get('http://127.0.0.1:8000/matrix/').then(
+        response => {
+          this.items = response.data.results.map(i => i.matrix_id)
+        }
+      );
+    },
+    postResults: function() {
+      axios.post('http://127.0.0.1:8000/matrix/', {dna: this.dnaSequence, motifs: this.motifsChosen}).then(
+        response => {
+          this.presentResults()
+          this.result.push(response.data);
+        }
+      );
+    },
     submit () {
       // Sjekker om form er fylt ut 
       this.$refs.observer.validate()
     },
-
     //async remove() {
     //  this.loading = true;
     //  await new Promise((resolve) => setTimeout(resolve, 3000)); //Oppdatere slik at den loader til resultater er klare
     //  this.loading = false;
     //},
-  
+    makeGraph() {
+      //TODO
+    },
     presentResults () {
       //Presentere resultatet
       
-      //TODO: Fyll inn resultater + lag graf
+      this.makeGraph()
 
       this.revealButton= false
       this.revealResult= true
@@ -246,6 +257,9 @@ export default {
       this.$refs.observer.reset()
     }
   },
+  beforeMount(){
+    this.getMotifs()
+ },
 };
 </script>
 
