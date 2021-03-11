@@ -167,7 +167,7 @@ extend("min", {
 });
 
 extend("regex", {
-  ...regex, //TODO: Legg inn (v) => (v && !v.match("[^actgACTG]")) ||
+  ...regex,
   message: 
     "The {_field_} can only contain the characters A, T, C and G",
 });
@@ -233,7 +233,14 @@ export default {
     //  await new Promise((resolve) => setTimeout(resolve, 3000)); //Oppdatere slik at den loader til resultater er klare
     //  this.loading = false;
     //},
+
     makeGraph() {
+      //"Result, sorted from most to least likely is presented below. Only the top X most likely binding sites are shown."
+      //for x in this.motifsResults {
+      //  "Motif id: " + i.matrix_id
+      //  "Chance of attachment:" + i.matrix_score
+      //}
+
       //TODO
     },
     presentResults () {
