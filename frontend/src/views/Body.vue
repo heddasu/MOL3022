@@ -118,18 +118,14 @@
             <p>{{ dnaSequence }}</p>
           </v-card-text>
         </v-row>
-        <v-row>
-          <v-card-text class="my-2 py-0">
-            <h4>Result:</h4>
-            <ul>
-              <li v-for="(motif, index) in results" :key="index">{{ motif }}</li>
-            </ul>
-          </v-card-text>
-        </v-row>
-          <v-row v-for="(motif, index) in results" :key="index">
+        <v-row v-for="(motif, index) in results" :key="index">
             <v-card-text class="my-2 py-0">
               <h4>Matrix id: {{motif.id}}</h4>
-              <Chart :chartdata="motif.probability"/>
+              <div style="width: 100%; overflow-x: auto;">
+                <div :style="{width: (motif.probability.length * 30) + 'px', height: '300px'}">
+                  <Chart :chartdata="motif.probability"/>
+                </div>
+              </div>
             </v-card-text>
           </v-row>
         <v-card-text>
@@ -223,21 +219,11 @@ export default {
       // Sjekker om form er fylt ut
       this.$refs.observer.validate();
     },
-    makeCharts() {
-      //for (i = 0; i < this.results.length; i++) {
-      //  console.log("id: " + this.results[i].id)
-      //  for (j = 0; j < this.results.length; j++) {
-      //     console.log(j + " " + this.results[i].probability[j])
-      //  } 
-      //}
-    },
     computeResults() {
       //Sender valg til backend, går tilbake resultater, lager graf og viser dette til bruker.
       this.loading = true;
 
       this.postResults();
-
-      //Lag / loop igjennom resultater og lag grafer 
 
       this.loading = false;
       this.revealButton = false;
@@ -261,4 +247,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>
