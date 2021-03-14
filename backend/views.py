@@ -41,16 +41,19 @@ class MatrixViewSet(viewsets.ModelViewSet):
         dna_sequence = data.get("dnaSequence")
         relevant_matrices = queryset.filter(matrix_id__in=(data.get("motifsChosen")))
         
-        probabilities = {}
+        results = []
+        
 
         for matrix in relevant_matrices:
             pfm_result = Pfm.objects.filter(id=matrix.pfm.id)
             for pfm in pfm_result:
-
+                data = {}
                 pfm_matrix = tranform_pfm_object_to_matrix(pfm)
                 calc_pwm = transform_pfm_to_pwm(pfm_matrix)
                 probability = compute_sequence_prob(calc_pwm, dna_sequence)
-                probabilities[pfm.id] = probability
+                data["id"] = pfm.id
+                data["probability"] = probability
+                results.append(data)
                 #TODO: Samle på top X probs per motif, sammenligne topX per med hverandre for å finne total top X
             
         """
@@ -68,7 +71,7 @@ class MatrixViewSet(viewsets.ModelViewSet):
         #print("DATA", data)
 
         return Response(
-            probabilities,
+            results,
             status=status.HTTP_200_OK,
         )
 
