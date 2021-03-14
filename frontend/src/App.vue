@@ -2,7 +2,7 @@
   <v-app>
     <Header />
     <v-main>
-      <Input/>
+      <Body/>
     </v-main>
     <Footer />
   </v-app>
@@ -11,12 +11,12 @@
 <script>
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Input from "./views/Input";
+import Body from "./views/Body";
 
 export default {
   components: {
     Header,
-    Input,
+    Body,
     Footer,
   },
   data: () => ({

@@ -79,7 +79,7 @@
             elevation="2"
             rounded
             color="cyan"
-            @click= "computeResults"
+            @click="computeResults"
             >Compute result
           </v-btn>
         </v-row>
@@ -122,7 +122,8 @@
             <Input/>
           </v-card-text>
         </v-row>
-            <v-row 
+         <v-card-text>
+           <v-row 
         align="center"
         justify="space-around">
           <v-btn
@@ -130,10 +131,11 @@
             elevation="2"
             rounded
             color="cyan"
-            @click= "reset"
+            @click="reset"
             >Reset
           </v-btn>
         </v-row>
+        </v-card-text>
         </v-card>
     </v-container>
   </div>
@@ -178,8 +180,6 @@ export default {
     ValidationProvider,
     ValidationObserver,
   },
-  props: {
-  },
   data: () => ({
     dnaSequence: null,
     motifsChosen: [],
@@ -191,8 +191,6 @@ export default {
     results: null,
     items: [],
   }),
-  computed: {
-  },
   methods: {
     getMotifs: function() {
       axios.get('http://127.0.0.1:8000/matrix/').then(
@@ -209,7 +207,6 @@ export default {
           this.results = response.data;
         }
       );
-    
     },
     submit () {
       // Sjekker om form er fylt ut 
@@ -239,9 +236,8 @@ export default {
       this.revealButton= false
       this.editInput = false
       this.revealResult= true
-    }
-  },
-  reset () {
+    },
+    reset () {
       //Reset alt / Starte applikasjon på nytt
       this.dnaSequence = null
       this.motifsChosen = []
@@ -251,9 +247,10 @@ export default {
       this.editInput = true
       this.$refs.observer.reset()
     },
+  },
   beforeMount(){
     this.getMotifs()
- },
+  },
 };
 </script>
 
