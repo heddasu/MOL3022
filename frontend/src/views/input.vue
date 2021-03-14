@@ -117,6 +117,11 @@
             </ul>
           </v-card-text>
         </v-row>
+        <v-row>
+          <v-card-text class="my-2 py-0">
+            <Input/>
+          </v-card-text>
+        </v-row>
             <v-row 
         align="center"
         justify="space-around">
@@ -143,6 +148,7 @@ import {
   setInteractionMode,
 } from "vee-validate";
 import axios from 'axios';
+//import Chart from '../components/Chart'
 
 setInteractionMode("eager");
 
