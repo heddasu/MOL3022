@@ -41,7 +41,7 @@
         </v-row>
         <v-row>
           <v-card-text class="my-0 py-0">
-            The DNA-sequence is scanned, and among the chosen motifes, the top 5 most
+            The DNA-sequence is scanned, and among the chosen motifes, the most
             likely transcription factor binding sites in the sequence is
             identified.
           </v-card-text>
@@ -79,7 +79,7 @@
             elevation="2"
             rounded
             color="cyan"
-            @click= "loader = 'loading'"
+            @click= "computeResults"
             >Compute result
           </v-btn>
         </v-row>
@@ -95,9 +95,12 @@
         </v-row>
         <v-row>
           <v-card-text class="my-0 py-0">
-            The DNA-sequence was scanned, and among the chosen motifes, the top 5 most
+            The DNA-sequence was scanned, and among the chosen motifes, the top 10 most
             likely transcription factor binding sites in the sequence was
-            identified. The results are shown as a graph.
+            identified. Below is an illustration showing how the DNA-sequence is indexed in the result table. 
+          </v-card-text>
+          <v-card-text align="center" class="my-0 py-0">
+            <v-img src="@/assets/Dna-sequence.png" max-width="700" ></v-img>
           </v-card-text>
         </v-row>
         <v-row>
@@ -108,15 +111,7 @@
         </v-row>
         <v-row>
           <v-card-text class="my-2 py-0">
-            <h4>Chosen Motifs: </h4>
-            <ul>
-            <li v-for="motif in motifsChosen" :key="motif">{{motif}}</li>
-            </ul>
-          </v-card-text>
-        </v-row>
-        <v-row>
-          <v-card-text class="my-2 py-0">
-            <h4> Most likely transcription factor binding sites (sorted from most to least likely): </h4>
+            <h4>Result:</h4>
             <ul>
             <li v-for="motif in results" :key="motif">{{motif}}</li>
             </ul>
@@ -183,7 +178,6 @@ export default {
     dnaSequence: null,
     motifsChosen: [],
     select: null,
-    loader: null,
     loading: false,
     revealResult: false,
     revealButton: true,
@@ -191,20 +185,6 @@ export default {
     results: null,
     items: [],
   }),
-  watch: {
-      loader () {
-        //Loader mens data sendes og motass 
-        
-        //TODO: Send data
-        const l = this.loader
-        this[l] = !this[l]
-        setTimeout(() => (this[l] = false), 3000) //TODO: Load til data er mottatt
-        this.loader = null
-
-        this.postResults()
-        this.presentResults()
-      }
-  },
   computed: {
   },
   methods: {
@@ -220,21 +200,16 @@ export default {
         dnaSequence: this.dnaSequence, motifsChosen: this.motifsChosen}
         ).then(
         response => {
-          this.results = response.data; //TODO: Oppdater så vi får akkuratt den dataen vi vil ha 
+          this.results = response.data;
         }
       );
+    
     },
     submit () {
       // Sjekker om form er fylt ut 
       this.$refs.observer.validate()
     },
-    //async remove() {
-    //  this.loading = true;
-    //  await new Promise((resolve) => setTimeout(resolve, 3000)); //Oppdatere slik at den loader til resultater er klare
-    //  this.loading = false;
-    //},
-
-    makeGraph() {
+    makeGraphs() {
       //"Result, sorted from most to least likely is presented below. Only the top X most likely binding sites are shown."
       //for x in this.results {
       //  "Motif id: " + i.matrix_id
@@ -242,21 +217,25 @@ export default {
       //}
 
       //TODO: 
-      //Mulig å zoome i grafene 
-      //Y-aksen viser score for om det eksisterer et bindingssete for en gitt posisjon, 
-      //X-aksen viser hvilken posisjon det er snakk om. 
+      //Mulig å zoome i grafene
+      //Y-aksen viser score for om det eksisterer et bindingssete for en gitt posisjon,
+      //X-aksen viser hvilken posisjon det er snakk om.
     },
-    presentResults () {
-      //Presentere resultatet
+    computeResults () {
+      //Sender valg til backend, går tilbake resultater, lager graf og viser dette til bruker. 
+      this.loading = true
       
-      this.makeGraph()
+      this.postResults()
 
+      this.makeGraphs()
+
+      this.loading = false
       this.revealButton= false
-      this.revealResult= true
       this.editInput = false
-    },
-
-    reset () {
+      this.revealResult= true
+    }
+  },
+  reset () {
       //Reset alt / Starte applikasjon på nytt
       this.dnaSequence = null
       this.motifsChosen = []
@@ -265,8 +244,7 @@ export default {
       this.revealButton = true
       this.editInput = true
       this.$refs.observer.reset()
-    }
-  },
+    },
   beforeMount(){
     this.getMotifs()
  },
