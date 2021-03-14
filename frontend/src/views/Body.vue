@@ -130,6 +130,10 @@
           </v-card-text>
         </v-row>
         <v-row align="center" justify="space-around">
+         <v-card-text>
+           <v-row 
+        align="center"
+        justify="space-around">
           <v-btn
             class="my-2 py-0"
             elevation="2"
@@ -183,7 +187,6 @@ export default {
     ValidationProvider,
     ValidationObserver,
   },
-  props: {},
   data: () => ({
     dnaSequence: null,
     motifsChosen: [],
@@ -195,7 +198,6 @@ export default {
     results: null,
     items: [],
   }),
-  computed: {},
   methods: {
     getMotifs: function() {
       axios.get("http://127.0.0.1:8000/matrix/").then((response) => {
@@ -210,7 +212,8 @@ export default {
         })
         .then((response) => {
           this.results = response.data;
-        });
+        }
+      );
     },
     submit() {
       // Sjekker om form er fylt ut
@@ -233,26 +236,24 @@ export default {
 
       this.postResults();
 
-      this.makeGraphs();
-
-      this.loading = false;
-      this.revealButton = false;
-      this.editInput = false;
-      this.revealResult = true;
+      this.loading = false
+      this.revealButton= false
+      this.editInput = false
+      this.revealResult= true
+    },
+    reset () {
+      //Reset alt / Starte applikasjon på nytt
+      this.dnaSequence = null
+      this.motifsChosen = []
+      this.select = null
+      this.revealResult = false
+      this.revealButton = true
+      this.editInput = true
+      this.$refs.observer.reset()
     },
   },
-  reset() {
-    //Reset alt / Starte applikasjon på nytt
-    this.dnaSequence = null;
-    this.motifsChosen = [];
-    this.select = null;
-    this.revealResult = false;
-    this.revealButton = true;
-    this.editInput = true;
-    this.$refs.observer.reset();
-  },
-  beforeMount() {
-    this.getMotifs();
+  beforeMount(){
+    this.getMotifs()
   },
 };
 </script>
