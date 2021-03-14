@@ -113,17 +113,6 @@
           <v-card-text class="my-2 py-0">
             <h4>Result:</h4>
             <ul>
-<<<<<<< HEAD
-=======
-            <li v-for="motif in motifsChosen" :key="motif">{{motif}}</li>
-            </ul>
-          </v-card-text>
-        </v-row>
-        <v-row>
-          <v-card-text class="my-2 py-0">
-            <h4> Most likely transcription factor binding sites (sorted from most to least likely): </h4>
-            <ul>
->>>>>>> e39a75a26b8588c8afa35ac91574beb2393b4105
             <li v-for="motif in results" :key="motif">{{motif}}</li>
             </ul>
           </v-card-text>
@@ -196,23 +185,6 @@ export default {
     results: null,
     items: [],
   }),
-<<<<<<< HEAD
-=======
-  watch: {
-      loader () {
-        //Loader mens data sendes og motass 
-        
-        //TODO: Send data
-        const l = this.loader
-        this[l] = !this[l]
-        setTimeout(() => (this[l] = false), 3000) //TODO: Load til data er mottatt
-        this.loader = null
-
-        this.postResults()
-        this.presentResults()
-      }
-  },
->>>>>>> e39a75a26b8588c8afa35ac91574beb2393b4105
   computed: {
   },
   methods: {
@@ -228,32 +200,16 @@ export default {
         dnaSequence: this.dnaSequence, motifsChosen: this.motifsChosen}
         ).then(
         response => {
-<<<<<<< HEAD
           this.results = response.data;
         }
       );
     
-=======
-          this.results = response.data; //TODO: Oppdater så vi får akkuratt den dataen vi vil ha 
-        }
-      );
->>>>>>> e39a75a26b8588c8afa35ac91574beb2393b4105
     },
     submit () {
       // Sjekker om form er fylt ut 
       this.$refs.observer.validate()
     },
-<<<<<<< HEAD
     makeGraphs() {
-=======
-    //async remove() {
-    //  this.loading = true;
-    //  await new Promise((resolve) => setTimeout(resolve, 3000)); //Oppdatere slik at den loader til resultater er klare
-    //  this.loading = false;
-    //},
-
-    makeGraph() {
->>>>>>> e39a75a26b8588c8afa35ac91574beb2393b4105
       //"Result, sorted from most to least likely is presented below. Only the top X most likely binding sites are shown."
       //for x in this.results {
       //  "Motif id: " + i.matrix_id
@@ -261,7 +217,6 @@ export default {
       //}
 
       //TODO: 
-<<<<<<< HEAD
       //Mulig å zoome i grafene
       //Y-aksen viser score for om det eksisterer et bindingssete for en gitt posisjon,
       //X-aksen viser hvilken posisjon det er snakk om.
@@ -273,16 +228,6 @@ export default {
       this.postResults()
 
       this.makeGraphs()
-=======
-      //Mulig å zoome i grafene 
-      //Y-aksen viser score for om det eksisterer et bindingssete for en gitt posisjon, 
-      //X-aksen viser hvilken posisjon det er snakk om. 
-    },
-    presentResults () {
-      //Presentere resultatet
-      
-      this.makeGraph()
->>>>>>> e39a75a26b8588c8afa35ac91574beb2393b4105
 
       this.loading = false
       this.revealButton= false
@@ -299,12 +244,7 @@ export default {
       this.revealButton = true
       this.editInput = true
       this.$refs.observer.reset()
-<<<<<<< HEAD
     },
-=======
-    }
-  },
->>>>>>> e39a75a26b8588c8afa35ac91574beb2393b4105
   beforeMount(){
     this.getMotifs()
  },
