@@ -129,20 +129,18 @@
             <ChartTest />
           </v-card-text>
         </v-row>
-        <v-row align="center" justify="space-around">
-         <v-card-text>
-           <v-row 
-        align="center"
-        justify="space-around">
-          <v-btn
-            class="my-2 py-0"
-            elevation="2"
-            rounded
-            color="cyan"
-            @click="reset"
-            >Reset
-          </v-btn>
-        </v-row>
+        <v-card-text>
+          <v-row align="center" justify="space-around">
+            <v-btn
+              class="my-2 py-0"
+              elevation="2"
+              rounded
+              color="cyan"
+              @click="reset"
+              >Reset
+            </v-btn>
+          </v-row>
+        </v-card-text>
       </v-card>
     </v-container>
   </div>
@@ -212,8 +210,7 @@ export default {
         })
         .then((response) => {
           this.results = response.data;
-        }
-      );
+        });
     },
     submit() {
       // Sjekker om form er fylt ut
@@ -236,24 +233,24 @@ export default {
 
       this.postResults();
 
-      this.loading = false
-      this.revealButton= false
-      this.editInput = false
-      this.revealResult= true
+      this.loading = false;
+      this.revealButton = false;
+      this.editInput = false;
+      this.revealResult = true;
     },
-    reset () {
+    reset() {
       //Reset alt / Starte applikasjon på nytt
-      this.dnaSequence = null
-      this.motifsChosen = []
-      this.select = null
-      this.revealResult = false
-      this.revealButton = true
-      this.editInput = true
-      this.$refs.observer.reset()
+      this.dnaSequence = null;
+      this.motifsChosen = [];
+      this.select = null;
+      this.revealResult = false;
+      this.revealButton = true;
+      this.editInput = true;
+      this.$refs.observer.reset();
     },
   },
-  beforeMount(){
-    this.getMotifs()
+  beforeMount() {
+    this.getMotifs();
   },
 };
 </script>
