@@ -101,10 +101,12 @@
         </v-row>
         <v-row>
           <v-card-text class="my-0 py-0">
-            The DNA-sequence was scanned, and among the chosen motifes, the top
-            10 most likely transcription factor binding sites in the sequence
-            was identified. Below is an illustration showing how the
-            DNA-sequence is indexed in the result table.
+            The DNA-sequence was scanned, and for each motif chosen the likelyhood of a transcription factor binding sites was identified. 
+            Below is an illustration showing how the DNA-sequence is indexed in the result graphs. 
+            Each bar in the bar grahp represent the likelyhood for a motif binding to the DNA-sequence. 
+            The start index is represented with the bar, and the end index is equal to start index plus the length of the motif. 
+            The x-axis in the graph represent the probability for the motif binding. 
+            The y-axis in the graph represent the index of the DNA-sequence. 
           </v-card-text>
           <v-card-text align="center" class="my-0 py-0">
             <v-img src="@/assets/Dna-sequence.png" max-width="700"></v-img>
@@ -120,15 +122,16 @@
           <v-card-text class="my-2 py-0">
             <h4>Result:</h4>
             <ul>
-              <li v-for="motif in results" :key="motif">{{ motif }}</li>
+              <li v-for="(motif, index) in results" :key="index">{{ motif }}</li>
             </ul>
           </v-card-text>
         </v-row>
-        <v-row>
-          <v-card-text class="my-2 py-0">
-            <ChartTest />
-          </v-card-text>
-        </v-row>
+          <v-row v-for="(motif, index) in results" :key="index">
+            <v-card-text class="my-2 py-0">
+              <h4>Matrix id: {{motif.id}}</h4>
+              <Chart :chartdata="motif.probability"/>
+            </v-card-text>
+          </v-row>
         <v-card-text>
           <v-row align="center" justify="space-around">
             <v-btn
@@ -155,7 +158,8 @@ import {
   setInteractionMode,
 } from "vee-validate";
 import axios from "axios";
-import ChartTest from "../components/ChartTest";
+import Chart from "../components/Chart"
+import { Bar } from 'vue-chartjs';
 
 setInteractionMode("eager");
 
@@ -180,8 +184,9 @@ extend("regex", {
 });
 
 export default {
+  extends: Bar,
   components: {
-    ChartTest,
+    Chart,
     ValidationProvider,
     ValidationObserver,
   },
@@ -194,6 +199,7 @@ export default {
     revealButton: true,
     editInput: true,
     results: null,
+    resultsID: null,
     items: [],
   }),
   methods: {
@@ -205,10 +211,11 @@ export default {
     postResults: function() {
       axios
         .post("http://127.0.0.1:8000/matrix/", {
-          dnaSequence: this.dnaSequence,
+          dnaSequence: this.dnaSequence.toUpperCase(),
           motifsChosen: this.motifsChosen,
         })
         .then((response) => {
+          console.log(response.data)
           this.results = response.data;
         });
     },
@@ -216,22 +223,21 @@ export default {
       // Sjekker om form er fylt ut
       this.$refs.observer.validate();
     },
-    makeGraphs() {
-      //"Result, sorted from most to least likely is presented below. Only the top X most likely binding sites are shown."
-      //for x in this.results {
-      //  "Motif id: " + i.matrix_id
-      //  "Chance of attachment:" + i.matrix_score
+    makeCharts() {
+      //for (i = 0; i < this.results.length; i++) {
+      //  console.log("id: " + this.results[i].id)
+      //  for (j = 0; j < this.results.length; j++) {
+      //     console.log(j + " " + this.results[i].probability[j])
+      //  } 
       //}
-      //TODO:
-      //Mulig å zoome i grafene
-      //Y-aksen viser score for om det eksisterer et bindingssete for en gitt posisjon,
-      //X-aksen viser hvilken posisjon det er snakk om.
     },
     computeResults() {
       //Sender valg til backend, går tilbake resultater, lager graf og viser dette til bruker.
       this.loading = true;
 
       this.postResults();
+
+      //Lag / loop igjennom resultater og lag grafer 
 
       this.loading = false;
       this.revealButton = false;
