@@ -55,7 +55,7 @@ def compute_sequence_prob(pwm, sequence):
     for i in range(len(sequence) - motif_length+1):
         prob_score = [pwm[base_index[sequence[j]]][ j - i] for j in range(i, i + motif_length)]
         prob.append(sum(prob_score))
-    return prob
+    return prob #TODO: ta vare  på index til proben 
 
 
 def main():
