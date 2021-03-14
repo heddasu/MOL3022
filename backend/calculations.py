@@ -32,7 +32,6 @@ def calculate_number_of_sites(pfm):
 # Background frequency is set to 0.25 assuming it is uniform.
 def calculate_pwm(freq, sites_count, bg=0.25):
     p = (freq + (math.sqrt(sites_count) * 1/4)) / (sites_count + (4 * (math.sqrt(sites_count) * 1/4)))
-    print("SITES",sites_count)
     pwm = math.log(p/bg,2)
     return pwm
 
