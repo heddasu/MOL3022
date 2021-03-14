@@ -32,6 +32,7 @@ def calculate_number_of_sites(pfm):
 # Background frequency is set to 0.25 assuming it is uniform.
 def calculate_pwm(freq, sites_count, bg=0.25):
     p = (freq + (math.sqrt(sites_count) * 1/4)) / (sites_count + (4 * (math.sqrt(sites_count) * 1/4)))
+    print("SITES",sites_count)
     pwm = math.log(p/bg,2)
     return pwm
 
@@ -53,9 +54,14 @@ def compute_sequence_prob(pwm, sequence):
     motif_length = len(pwm[0])
     prob = [0]*(len(sequence) - motif_length+1) 
     for i in range(len(sequence) - motif_length+1):
-        prob_score = [pwm[base_index[sequence[j]]][ j - i] for j in range(i, i + motif_length)]
-        prob.append(sum(prob_score))
-    return prob
+        prob_score = []
+
+        for j in range(i, i + motif_length):
+            index_of_base = base_index[sequence[j]]
+            prob_score.append(pwm[index_of_base][j - i])
+        prob[i]=sum(prob_score)
+
+    return prob #TODO: ta vare  på index til proben 
 
 
 def main():
