@@ -7,23 +7,3 @@
     </v-row>
   </v-app-bar>
 </template>
-
-<script>
-export default {
-  methods: {
-    toggleView() {
-      this.$emit("switch");
-    },
-  },
-};
-</script>
-
-<style lang="scss">
-#switch-view-button {
-  position: absolute;
-  right: 5px;
-}
-.user-select-none {
-  user-select: none;
-}
-</style>
