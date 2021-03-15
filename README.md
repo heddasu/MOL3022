@@ -42,4 +42,20 @@ The application is built upon Django RF.
   ```(venv)$ python manage.py runserver```
 
 ## Run frontend
-In another terminal, ......
+In another terminal go into the folder with the command
+
+```$ cd MOL3022```
+ 
+and go into the frontend folder
+
+```cd frontend```
+
+### Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
