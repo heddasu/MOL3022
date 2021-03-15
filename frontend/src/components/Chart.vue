@@ -58,7 +58,7 @@ export default {
         datasets: [{
           label: 'Probability',
           data: this.chartdata,
-          backgroundColor: 'rgba(54, 162, 235, 0.35)'
+          backgroundColor: 'rgb(51, 204, 255)'
         }]
       }
       , this.options);

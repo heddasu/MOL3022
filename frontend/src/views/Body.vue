@@ -123,7 +123,7 @@
             <v-card-text class="my-2 py-0">
               <h4>Matrix id: {{motif.id}}</h4>
               <div style="width: 100%; height: 250px; overflow-x: scroll;">
-                  <Chart :height="300" :width="1500" :chartdata="motif.probability" :options="chartOptions"/>
+                  <Chart :height="300" :width="1500" :chartdata="motif.probability"/>
               </div>
             </v-card-text>
           </v-row>
