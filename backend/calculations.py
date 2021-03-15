@@ -61,7 +61,7 @@ def compute_sequence_prob(pwm, sequence):
             prob_score.append(pwm[index_of_base][j - i])
         prob[i]=sum(prob_score)
 
-    return prob #TODO: ta vare  på index til proben 
+    return prob  
 
 
 def main():

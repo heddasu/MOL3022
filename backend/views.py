@@ -50,11 +50,10 @@ class MatrixViewSet(viewsets.ModelViewSet):
                 pfm_matrix = tranform_pfm_object_to_matrix(pfm)
                 calc_pwm = transform_pfm_to_pwm(pfm_matrix)
                 probability = compute_sequence_prob(calc_pwm, dna_sequence)
-                data["id"] = pfm.id #TODO: Endre så man får matrise
+                data["id"] = matrix.matrix_id 
                 data["probability"] = probability
                 results.append(data)
-                #TODO: Samle på top X probs per motif, sammenligne topX per med hverandre for å finne total top X
-            
+                
         """
         pfm = Pfm.objects.filter(id=3)
         for p in pfm:

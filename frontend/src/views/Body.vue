@@ -121,10 +121,10 @@
         <v-row v-for="(motif, index) in results" :key="index">
             <v-card-text class="my-2 py-0">
               <h4>Matrix id: {{motif.id}}</h4>
-              <div style="width: 100%; overflow-x: auto;">
-                <div :style="{width: (motif.probability.length * 30) + 'px', height: '300px'}">
+              <div style="width: 100%; height: 250px; overflow-x: scroll;">
+                
                   <Chart :chartdata="motif.probability"/>
-                </div>
+                
               </div>
             </v-card-text>
           </v-row>
@@ -195,7 +195,6 @@ export default {
     revealButton: true,
     editInput: true,
     results: null,
-    resultsID: null,
     items: [],
   }),
   methods: {
