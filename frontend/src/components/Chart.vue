@@ -1,9 +1,55 @@
 <script>
-import { Bar } from 'vue-chartjs'
+import { Bar} from 'vue-chartjs'
+
 
 export default {
   extends: Bar,
-  props: ['chartdata', 'options'],
+  props: {
+    chartdata: {
+      type: Object,
+      default: null,
+    },
+    options: {
+            pan: {
+              enabled: true,
+              mode: "x"
+            },
+            zoom: {
+              enabled: true,
+              mode: "x"
+            },
+            legend: {
+              display: false
+            },
+            maintainAspectRatio: false,
+            scales: {
+              xAxes: [
+                {
+                  barPercentage: 6,
+                  scaleLabel: {
+                    display: true,
+                    labelString: "Posisjon"
+                  },
+                }
+              ],
+              yAxes: [
+                {
+                  scaleLabel: {
+                    display: true,
+                    labelString: "Score"
+                  },
+                  ticks: {
+                    min: 0,
+                    max: 300,
+                    stepSize: 100,
+                    reverse: false,
+                    beginAtZero: true
+                }
+                }
+              ]
+            }}
+          
+  },
   mounted () {
     console.log(this.chartdata);
     if (this.chartdata) {
@@ -12,16 +58,10 @@ export default {
         datasets: [{
           label: 'Probability',
           data: this.chartdata,
-        }],
-      }, {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    });
+          backgroundColor: 'rgba(54, 162, 235, 0.35)'
+        }]
+      }
+      , this.options);
     }
   }
 }

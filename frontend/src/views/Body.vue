@@ -101,10 +101,11 @@
         </v-row>
         <v-row>
           <v-card-text class="my-0 py-0">
-            The DNA-sequence was scanned, and for each motif chosen the likelyhood of a transcription factor binding sites was identified. 
-            Below is an illustration showing how the DNA-sequence is indexed in the result graphs. 
-            Each bar in the bar grahp represent the likelyhood for a motif binding to the DNA-sequence. 
-            The start index is represented with the bar, and the end index is equal to start index plus the length of the motif. 
+            The DNA-sequence was scanned, and for each motif chosen the likelihood of a transcription factor binding sites was identified. 
+            Below is an illustration showing how the DNA sequence is indexed in the result graph(s). 
+            Each bar in the bar graph represent the likelihood for a motif binding to the DNA-sequence. 
+            <br/><br/>
+            The index is represented with the bar, and it represents the start index on the DNA sequence.
             The x-axis in the graph represent the probability for the motif binding. 
             The y-axis in the graph represent the index of the DNA-sequence. 
           </v-card-text>
@@ -122,9 +123,7 @@
             <v-card-text class="my-2 py-0">
               <h4>Matrix id: {{motif.id}}</h4>
               <div style="width: 100%; height: 250px; overflow-x: scroll;">
-                
-                  <Chart :chartdata="motif.probability"/>
-                
+                  <Chart :height="300" :width="1500" :chartdata="motif.probability" :options="chartOptions"/>
               </div>
             </v-card-text>
           </v-row>
@@ -231,6 +230,7 @@ export default {
     },
     reset() {
       //Reset alt / Starte applikasjon på nytt
+      this.results = null;
       this.dnaSequence = null;
       this.motifsChosen = [];
       this.select = null;
@@ -238,6 +238,7 @@ export default {
       this.revealButton = true;
       this.editInput = true;
       this.$refs.observer.reset();
+      
     },
   },
   beforeMount() {
