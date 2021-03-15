@@ -6,7 +6,7 @@ To run the application, it is suggested that you make an virtual Python environm
 
 Given that you already have Python 3 and pip installed, you can follow this guide. In the code lines, the `$` sign is included to show that these are command lines. Do not include the `$` sign when writing it in terminal.
 
-##### Open terminal, and run the following command:
+#### Open terminal, and run the following command:
 
 ```$ pip install virtualenv```
 
