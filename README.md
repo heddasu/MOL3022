@@ -19,6 +19,7 @@ Given that you already have Python 3 and pip installed, you can follow this guid
 
 
 ### TODO LEGG INN git clone og naviger inn i repo
+
 #### Inside the project folder (MOL3022)
 Run the following commands:
 
@@ -51,11 +52,14 @@ and go into the frontend folder
 ```cd frontend```
 
 ### Project setup
-```
-npm install
-```
+
+```npm install```
 
 ### Compiles and hot-reloads for development
-```
-npm run serve
-```
+
+```npm run serve```
+
+### Compiles and hot-reloads for development
+Go to browser and visit:
+
+http://localhost:8080/
