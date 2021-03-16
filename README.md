@@ -66,7 +66,7 @@ and go into the frontend folder
 
 ```$ npm run serve```
 
-### Access web page
-Go to browser and visit:
+## Access web page
+When backend and frontend is running, go to browser and visit:
 
 http://localhost:8080/
