@@ -3,7 +3,7 @@ In the command lines provided below, the `$` sign is included to show that these
 
 ## Prerequisites
 To run the project ```git```, ```Python3```, ```pip``` and ```npm``` need to be installed. 
-If windows a terminal needs to be downloaded, e.g., PowerShell.
+If using Windows a terminal needs to be downloaded, e.g., PowerShell.
 
 ## Clone project 
 Given that you already have  ```git``` installed, you can follow this guide. 
