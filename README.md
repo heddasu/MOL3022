@@ -1,7 +1,7 @@
 # MOL3022
 In the command lines provided below, the `$` sign is included to show that these are command lines. Do not include the `$` sign when writing the lines in terminal.
 
-### Prerequisites
+## Prerequisites
 To run the project ```git```, ```Python 3```, ```pip``` and ```npm``` need to be installed. 
 
 ## Clone project 
