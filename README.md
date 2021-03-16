@@ -2,10 +2,10 @@
 In the command lines provided below, the `$` sign is included to show that these are command lines. Do not include the `$` sign when writing the lines in terminal.
 
 ### Prerequisites
-To run the project Git, Python 3, pip and npm need to be installed. 
+To run the project ```git```, ```Python 3```, ```pip``` and ```npm``` need to be installed. 
 
 ## Clone project 
-Given that you already have  ```Git``` installed, you can follow this guide. 
+Given that you already have  ```git``` installed, you can follow this guide. 
 
 In terminal, navigate into the folder your prefer to have this project. Then run the command:
 
