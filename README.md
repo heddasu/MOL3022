@@ -2,7 +2,8 @@
 In the command lines provided below, the `$` sign is included to show that these are command lines. Do not include the `$` sign when writing the lines in terminal.
 
 ## Prerequisites
-To run the project ```git```, ```Python 3```, ```pip``` and ```npm``` need to be installed. 
+To run the project ```git```, ```Python3```, ```pip``` and ```npm``` need to be installed. 
+If windows a terminal needs to be downloaded, e.g., PowerShell.
 
 ## Clone project 
 Given that you already have  ```git``` installed, you can follow this guide. 
@@ -17,7 +18,7 @@ Go into the folder with the command
 ```$ cd MOL3022```
 
 To run the application, it is suggested that you make an virtual Python environment. 
-Given that you already have  ```Python 3``` and  ```pip``` installed, you can follow this guide.
+Given that you already have  ```Python3``` and  ```pip``` installed, you can follow this guide.
 
 #### Open terminal, and run the following command:
 
