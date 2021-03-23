@@ -15,9 +15,9 @@ base_index = {
 def tranform_pfm_object_to_matrix(pfm):
     pfm_matrix = []
     pfm_matrix.append(pfm.adenin)
-    pfm_matrix.append(pfm.thymine)
     pfm_matrix.append(pfm.cytosine)
     pfm_matrix.append(pfm.guanine)
+    pfm_matrix.append(pfm.thymine)
     return pfm_matrix
 
 
@@ -46,8 +46,6 @@ def transform_pfm_to_pwm(pfm_matrix):
             base_list.append(value)
         pwm_matrix.append(base_list)
     return pwm_matrix
-
-
 #compute probability for the motif at all given positions in the sequence
 def compute_sequence_prob(pwm, sequence):
     motif_length = len(pwm[0])
