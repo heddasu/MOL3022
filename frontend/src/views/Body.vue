@@ -101,27 +101,29 @@
         </v-row>
         <v-row>
           <v-card-text class="my-0 py-0">
-            The DNA-sequence was scanned, and for each motif chosen the likelihood of a transcription factor binding sites was identified. 
-            Below is an illustration showing how the DNA sequence is indexed in the result graph(s). 
-            Each bar in the bar graph represent the likelihood for a motif binding to the DNA-sequence. 
-            <br/><br/>
-            The index is represented with the bar, and it represents the start index on the DNA sequence.
-            The x-axis in the graph represent the probability for the motif binding. 
-            The y-axis in the graph represent the index of the DNA-sequence. 
+            The DNA sequence was scanned, and the likelihood of finding each motif in the sequence is identified. 
+            The result for each motif is represented in its own graph.
+            The illustration below shows how the DNA sequence is indexed in the result graph(s). 
           </v-card-text>
           <v-card-text align="center" class="my-0 py-0">
             <v-img src="@/assets/Dna-sequence.png" max-width="700"></v-img>
           </v-card-text>
+          <v-card-text class="my-0 py-0">
+            Each bar in a graph represent the likelihood of finding the given motif at this position in the DNA sequence. 
+            The index for each bar represents the start index of the motif in the DNA sequence.
+            The x-axis of the graph represents the index of the DNA-sequence, and the y-axis in the graph represent the probability score for finding the motif.
+             <br/><br/>          
+          </v-card-text>
         </v-row>
         <v-row>
           <v-card-text class="my-2 py-0">
-            <h4>Chosen DNA-sequence:</h4>
+            <h3>Chosen DNA-sequence:</h3>
             <p>{{ dnaSequence }}</p>
           </v-card-text>
         </v-row>
         <v-row v-for="(motif, index) in results" :key="index">
             <v-card-text class="my-2 py-0">
-              <h4>Matrix id: {{motif.id}}</h4>
+              <h3>Matrix id: {{motif.id}}</h3>
               <div style="width: 100%; height: 250px; overflow-x: scroll;">
                   <Chart :height="300" :width="1500" :chartdata="motif.probability"/>
               </div>
