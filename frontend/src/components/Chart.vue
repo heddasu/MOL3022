@@ -56,7 +56,7 @@ export default {
       this.renderChart({
         labels: this.chartdata.map((_, i) => (i + 1)),
         datasets: [{
-          label: 'Probability',
+          label: 'Probability score',
           data: this.chartdata,
           backgroundColor: 'rgb(51, 204, 255)'
         }]

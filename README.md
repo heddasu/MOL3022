@@ -24,8 +24,6 @@ Given that you already have  ```Python3``` and  ```pip``` installed, you can fol
 
 ```$ pip install virtualenv```
 
-### TODO LEGG INN git clone og naviger inn i repo
-
 #### Inside the project folder (MOL3022)
 Run the following commands:
 
@@ -47,6 +45,7 @@ The application is built upon Django RF.
   ```(venv)$ python manage.py migrate```
 
   ```(venv)$ python manage.py runserver```
+
 
 ## Run frontend
 Given that you already have ```npm``` installed, you can follow this guide.
@@ -72,7 +71,15 @@ and go into the frontend folder
 
 ```$ npm run serve```
 
+
+
 ## Access web page
 When backend and frontend is running, go to browser and visit:
 
 http://localhost:8080/
+
+
+## Termination
+To terminate the application, close the browser window.
+
+Also, in each of the terminals (one for back end and one for front end) press `Ctrl + C` to quit the server.
