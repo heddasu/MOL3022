@@ -53,20 +53,6 @@ class MatrixViewSet(viewsets.ModelViewSet):
                 data["id"] = matrix.matrix_id 
                 data["probability"] = probability
                 results.append(data)
-                
-        """
-        pfm = Pfm.objects.filter(id=3)
-        for p in pfm:
-            pfm_matrix = tranform_pfm_object_to_matrix(p)
-        print('PFM-matrix', pfm_matrix)
-        count_sites = calculate_number_of_sites(pfm_matrix)  
-        calc_pwm = transform_pfm_to_pwm(pfm_matrix)
-        print('PWM_matrix', calc_pwm)
-
-        print('Calculate sequences', compute_sequence_prob(calc_pwm, 'AAAAAAAAAAAA'))"""
-        
-        #data = json.dumps(probabilities)
-        #print("DATA", data)
 
         return Response(
             results,
@@ -91,44 +77,6 @@ class PfmViewSet(viewsets.ReadOnlyModelViewSet):
                 print("Not valid PFM ID.")
 
         return queryset
-
-
-
-
-
-"""
-class CalculateViewSet(viewsets.ModelViewSet):
-    queryset = Matrix.objects.all()
-    serializer_class = MatrixSerializer
-
-
-    def get_queryset(self):
-        queryset = self.queryset
-
-        # data = json.loads(self.request.body.decode('utf-8'))
-
-        # relevant_matrices = queryset.filter(pk__in(data.meta.motifsChosen))
-
-        test_ids = ["CN0001.1", 'CN0002.1','CN0003.1']
-
-        relevant_matrices = queryset.filter(matrix_id__in=(test_ids))
-        print(relevant_matrices)
-
-        for matrix in relevant_matrices:
-            pfm_result = Pfm.objects.filter(id=matrix.pfm.id)
-            for pfm in pfm_result:
-                print(pfm.id)
-
-        return queryset
-
-        # for matrix in relevant_matrices:
-        #     pfm = Pfm.objects.filter(id=matrix.pfm)
-"""
-
-
-
-        
-
 
 
 
@@ -182,12 +130,5 @@ def post_matrix(matrix):
         )
         matrix_data.save()
 
-
-
-def matrix_detail(request, matrix_id):
-    matrix = Matrix.objects.get(matrix_id=matrix_id)
-    #qs_json = serializers.serialize('json', matrix)
-
-    return HttpResponse(matrix, content_type='application/json')
 
 """

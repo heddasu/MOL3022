@@ -101,13 +101,13 @@
         </v-row>
         <v-row>
           <v-card-text class="my-0 py-0">
-            The DNA-sequence was scanned, and for each motif chosen the likelihood of a transcription factor binding sites was identified. 
-            Below is an illustration showing how the DNA sequence is indexed in the result graph(s). 
-            Each bar in the bar graph represent the likelihood for a motif binding to the DNA-sequence. 
-            <br/><br/>
-            The index is represented with the bar, and it represents the start index on the DNA sequence.
-            The x-axis in the graph represent the probability for the motif binding. 
-            The y-axis in the graph represent the index of the DNA-sequence. 
+            The DNA sequence was scanned, and the likelihood of finding each motif in the sequence is identified. 
+            The result for each motif is represented in its own graph.
+            The illustration below shows how the DNA sequence is indexed in the result graph(s). 
+             <br/><br/>
+            Each bar in a graph represent the likelihood of finding the given motif at this position in the DNA sequence. 
+            The index for each bar represents the start index of the motif in the DNA sequence.
+            The x-axis of the graph represents the index of the DNA-sequence, and the y-axis in the graph represent the probability of finding the motif. 
           </v-card-text>
           <v-card-text align="center" class="my-0 py-0">
             <v-img src="@/assets/Dna-sequence.png" max-width="700"></v-img>
