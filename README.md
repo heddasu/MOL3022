@@ -50,7 +50,7 @@ The application is built upon Django RF.
 ## Run frontend
 Given that you already have ```npm``` installed, you can follow this guide.
 
-### Access the frontend folder 
+#### Access the frontend folder 
 In another terminal go into the folder with the command
 
 ```$ cd MOL3022```
@@ -59,15 +59,15 @@ and go into the frontend folder
 
 ```$ cd frontend```
 
-### Project setup
+#### Project setup
 
 ```$ npm install```
 
-### Install charts.js
+#### Install charts.js
 
 ```$ npm install --save axios chart.js```
 
-### Compiles and run project
+#### Compiles and run project
 
 ```$ npm run serve```
 
